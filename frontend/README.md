@@ -1,16 +1,24 @@
-# React + Vite
+# Personal portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+## Local development
 
-Currently, two official plugins are available:
+1. Install frontend and backend dependencies:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+   ```sh
+   cd frontend && npm install
+   cd ../backend && npm install
+   ```
 
-## React Compiler
+2. Start the API from `backend` with `npm run dev`.
+3. In another terminal, start the frontend from `frontend` with `npm run dev`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The frontend proxies `/api` requests to `http://localhost:8000` during development. Copy `.env.example` to `.env.local` only when you need to override the frontend defaults.
 
-## Expanding the Oxlint configuration
+## Deployment
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Deploy the frontend and backend as separate services, or serve both from the same origin:
+
+- **Frontend:** use `frontend` as the project root, `npm run build` as the build command, and `dist` as the output directory. Set `VITE_API_BASE_URL` to the backend's public origin when the API is hosted separately. Leave it empty for a same-origin API.
+- **Backend:** use `backend` as the project root and `npm start` as the start command. The service reads the hosting provider's `PORT` value and listens on all network interfaces. Set `CORS_ORIGIN` to the public frontend origin. Multiple allowed origins can be comma-separated.
+
+`VITE_API_BASE_URL` and `VITE_CODEFORCES_HANDLE` are frontend build-time settings and are embedded in the public site; do not put secrets in `VITE_*` variables. Backend settings belong in the backend service's environment and must not be committed. The `/health` endpoint can be used for backend health checks.
