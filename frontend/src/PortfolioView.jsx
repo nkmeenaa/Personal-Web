@@ -13,7 +13,6 @@ html { scroll-behavior: smooth; }
   .pf-backdrop, .pf-panel { animation: none; }
 }
 `;
-
 const serif = "font-['Literata',Georgia,serif]";
 const focus =
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2a5d9f]';
