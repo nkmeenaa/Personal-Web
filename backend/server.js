@@ -21,8 +21,6 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: portfolioCollection ? 'ok' : 'starting' });
 });
 
-
-// 1. Read portfolio content from MongoDB.
 app.get('/api/portfolio', async (req, res) => {
   try {
     const portfolio = await portfolioCollection.findOne({ _id: 'main' });
@@ -33,7 +31,6 @@ app.get('/api/portfolio', async (req, res) => {
   }
 });
 
-// 2. Endpoint to fetch Live Codeforces Rating
 app.get('/api/codeforces/:handle', async (req, res) => {
   try {
     const { handle } = req.params;
@@ -44,7 +41,7 @@ app.get('/api/codeforces/:handle', async (req, res) => {
   }
 });
 
-// 3. Contact Form Endpoint
+
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body || {};
   if (![name, email, message].every((value) => typeof value === 'string' && value.trim())) {
