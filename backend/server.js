@@ -13,17 +13,24 @@ const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:5173')
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 
-const mongoClient = new MongoClient(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017');
+let mongoClient;
 let portfolioCollection;
 let contactCollection;
 
 app.get('/health', (req, res) => {
-  res.status(200).json({ status: portfolioCollection ? 'ok' : 'starting' });
+  res.status(portfolioCollection ? 200 : 503).json({
+    status: portfolioCollection ? 'ok' : 'starting'
+  });
 });
 
 app.get('/api/portfolio', async (req, res) => {
   try {
     const portfolio = await portfolioCollection.findOne({ _id: 'main' });
+    if (!portfolio?.data) {
+      return res.status(404).json({
+        message: 'Portfolio data is not configured in MongoDB.'
+      });
+    }
     res.json(portfolio.data);
   } catch (err) {
     console.error('Failed to load portfolio:', err);
@@ -67,16 +74,11 @@ async function start() {
     throw new Error('MONGODB_URI is required. Add your MongoDB connection string to backend/.env.');
   }
 
+  mongoClient = new MongoClient(process.env.MONGODB_URI);
   await mongoClient.connect();
   const db = mongoClient.db(process.env.MONGODB_DB || 'personal_web');
   portfolioCollection = db.collection('portfolio');
   contactCollection = db.collection('contact_messages');
-
-  await portfolioCollection.updateOne(
-    { _id: 'main' },
-    { $setOnInsert: { data: DEFAULT_PORTFOLIO, updatedAt: new Date() } },
-    { upsert: true }
-  );
 
   const PORT = process.env.PORT || 8000;
   app.listen(PORT, '0.0.0.0', () => console.log(`Backend listening on port ${PORT}`));
