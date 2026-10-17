@@ -67,7 +67,7 @@ app.get('/api/portfolio', (req, res) => {
         live: null,
         certificate: "https://drive.google.com/file/d/1xhFfLv8IhNS91m8n67P0hQxY0Jy-SBS5/view?usp=drive_link"
       },{
-        title: "CalcInk: Handwritten Math Calculator",
+        title: "CalcInk: Handwriting Math Calculator",
         date: "Sept. 2026", // fill in
         subtitle: "Personal Project",
         points: [
