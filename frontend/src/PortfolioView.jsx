@@ -251,7 +251,6 @@ function PortfolioView({ data, cfData }) {
               I’m an aspiring Software Development Engineer (SDE) focused on backend development, with an interest in AI and machine learning.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <a href={`mailto:${profile.email2}`} className={solidBtn}>Email me</a>
               <a href={profile.github} target="_blank" rel="noopener noreferrer" className={outlineBtn}>GitHub</a>
               <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className={outlineBtn}>LinkedIn</a>
             </div>
@@ -394,8 +393,7 @@ function PortfolioView({ data, cfData }) {
             <p className="mt-1.5 text-[0.95rem] text-[#46544f]">Email is the quickest way to reach me.</p>
             <div className="mt-5 flex flex-wrap gap-3">
               <a href={`mailto:${profile.email2}`} className={solidBtn}>Email me</a>
-              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className={outlineBtn}>LinkedIn</a>
-              <a href={profile.github} target="_blank" rel="noopener noreferrer" className={outlineBtn}>GitHub</a>
+             
             </div>
           </div>
         </section>
