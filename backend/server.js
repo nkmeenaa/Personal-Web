@@ -5,11 +5,10 @@ const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
 const app = express();
-const allowedOrigins = (process.env.CORS_ORIGIN || '*')
-  .split(',')
-  .map((origin) => origin.trim())
-  .filter(Boolean);
-
+const corsOrigin = process.env.CORS_ORIGIN || '*';
+const allowedOrigins = corsOrigin === '*'
+  ? '*'
+  : corsOrigin.split(',').map((origin) => origin.trim()).filter(Boolean);
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 
