@@ -220,7 +220,7 @@ function PortfolioView({ data, cfData }) {
       <header className="sticky top-0 z-50 border-b border-[#d3d9d3] bg-[#f2f4f1]/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-4xl justify-end px-6 py-4">
           <nav aria-label="Sections" className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-[#5e6b67]">
-            {['projects', 'skills', 'achievements', 'education', 'experience', 'contact'].map((id) => (
+            {['projects', 'achievements', 'education', 'experience', 'contact'].map((id) => (
               <a
                 key={id}
                 href={`#${id}`}
@@ -364,7 +364,7 @@ function PortfolioView({ data, cfData }) {
 
       </main>
 
-      <footer className="border-t border-[#d3d9d3] pb-12 pt-8 text-[0.85rem] text-[#5e6b67]">
+      <footer id="contact" className="border-t border-[#d3d9d3] pb-12 pt-8 text-[0.85rem] text-[#5e6b67]">
         <div className="mx-auto max-w-4xl px-6">
           <div className="flex flex-wrap justify-center gap-3">
             <a
