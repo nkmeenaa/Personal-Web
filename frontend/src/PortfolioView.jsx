@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
-
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import { FiMail } from 'react-icons/fi';
 // Only fonts, smooth scrolling and the dialog animation need CSS; everything else is Tailwind.
 const fontImport = `
 @import url('https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Public+Sans:wght@400;500;600&display=swap');
@@ -249,13 +250,27 @@ function PortfolioView({ data, cfData }) {
             <p className={`${serif} mt-7 max-w-xl text-xl leading-[1.7]`}>
               I’m an aspiring Software Development Engineer (SDE) focused on backend development, with an interest in AI and machine learning.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <a href={profile.github} target="_blank" rel="noopener noreferrer" className={outlineBtn}>GitHub</a>
-              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className={outlineBtn}>LinkedIn</a>
-            </div>
+
           </div>
         </section>
 
+        <section id="education" className={section}>
+          <SectionTitle>Education</SectionTitle>
+          <ul className="grid gap-6">
+            {data.education.map((edu, i) => (
+              <li key={i} className="border-l-2 border-[#2a5d9f]/25 pl-4">
+                <div className={row}>
+                  <h3 className="text-[0.975rem] font-semibold">{edu.degree}</h3>
+                  <span className="shrink-0 whitespace-nowrap rounded-full border border-[#2a5d9f]/25 bg-[#2a5d9f]/10 px-2.5 py-0.5 text-xs font-medium text-[#1d4678]">
+                    {edu.year}
+                  </span>
+                </div>
+                <p className={sub}>{edu.institute}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+        
         <section id="projects" className={section}>
           <SectionTitle>Projects</SectionTitle>
           <div>
@@ -268,29 +283,6 @@ function PortfolioView({ data, cfData }) {
           </div>
         </section>
 
-        <section id="skills" className={section}>
-          <SectionTitle>Skills</SectionTitle>
-          <div>
-            <dl className="grid gap-x-6 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-y-4">
-              {Object.entries(data.skills).map(([category, items]) => (
-                <Fragment key={category}>
-                  <dt className="pt-0.5 text-[0.925rem] font-semibold text-[#1d4678]">{category}</dt>
-                  <dd className="mb-4 flex flex-wrap gap-1.5 sm:mb-0">
-                    {items.map((s, i) => (
-                      <span
-                        key={i}
-                        className="rounded-md border border-[#d3d9d3] bg-white/60 px-2.5 py-1 text-[0.85rem] text-[#2c3a37]"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </dd>
-                </Fragment>
-              ))}
-            </dl>
-            <p className="mt-4 text-[0.85rem] text-[#5e6b67]">*Basic proficiency</p>
-          </div>
-        </section>
 
         <section id="achievements" className={section}>
           <SectionTitle>Achievements</SectionTitle>
@@ -345,22 +337,7 @@ function PortfolioView({ data, cfData }) {
           </div>
         </section>
 
-        <section id="education" className={section}>
-          <SectionTitle>Education</SectionTitle>
-          <ul className="grid gap-6">
-            {data.education.map((edu, i) => (
-              <li key={i} className="border-l-2 border-[#2a5d9f]/25 pl-4">
-                <div className={row}>
-                  <h3 className="text-[0.975rem] font-semibold">{edu.degree}</h3>
-                  <span className="shrink-0 whitespace-nowrap rounded-full border border-[#2a5d9f]/25 bg-[#2a5d9f]/10 px-2.5 py-0.5 text-xs font-medium text-[#1d4678]">
-                    {edu.year}
-                  </span>
-                </div>
-                <p className={sub}>{edu.institute}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
+        
 
         <section id="experience" className={section}>
           <SectionTitle>Experience</SectionTitle>
@@ -385,22 +362,40 @@ function PortfolioView({ data, cfData }) {
           </ul>
         </section>
 
-        <section id="contact" className={section}>
-          <SectionTitle>Contact</SectionTitle>
-          <div className="rounded-xl border border-[#d3d9d3] bg-white/60 p-6">
-            <p className={`${serif} text-lg leading-snug`}>Want to work together or just say hello?</p>
-            <p className="mt-1.5 text-[0.95rem] text-[#46544f]">Email is the quickest way to reach me.</p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <a href={`mailto:${profile.email2}`} className={solidBtn}>Email me</a>
-             
-            </div>
-          </div>
-        </section>
       </main>
 
       <footer className="border-t border-[#d3d9d3] pb-12 pt-8 text-[0.85rem] text-[#5e6b67]">
         <div className="mx-auto max-w-4xl px-6">
-          © {new Date().getFullYear()} Nitin Kumar Meena, IIT Guwahati
+          <div className="flex flex-wrap justify-center gap-3">
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={outlineBtn}
+              aria-label="GitHub Profile"
+            >
+              <FaGithub size={20} />
+            </a>
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={outlineBtn}
+              aria-label="LinkedIn Profile"
+            >
+              <FaLinkedin size={20} />
+            </a>
+            <a
+              href={`mailto:${profile.email2}`}
+              className={outlineBtn}
+              aria-label="Email"
+            >
+              <FiMail size={20} />
+            </a>
+          </div>
+          <p className="mt-6 text-center">
+            © {new Date().getFullYear()} Nitin Kumar Meena, IIT Guwahati
+          </p>
         </div>
       </footer>
 
