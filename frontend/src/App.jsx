@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PortfolioView from './PortfolioView.jsx';
 
-const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/").replace(/\/$/, '');
 
 function App() {
   const [data, setData] = useState(null);
